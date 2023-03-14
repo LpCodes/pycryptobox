@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages,Extension
 
-with open("README.rst", "r", encoding="utf-8") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
@@ -19,6 +19,7 @@ setup(
     author="Lpcodes",
     author_email="lovelesh_p@outlook.com",
     description="A package for encrypting and decrypting files",
+    long_description_content_type="text/markdown",
     long_description=long_description,
     keywords="encryption decryption file-security cryptography",
     url="https://github.com/LpCodes/pycryptobox",
