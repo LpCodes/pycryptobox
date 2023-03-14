@@ -1,3 +1,7 @@
+.. image:: https://img.shields.io/pypi/v/pycryptobox?style=flat
+   :alt: PyPI
+.. image:: https://static.pepy.tech/personalized-badge/pycryptobox?period=total&units=international_system&left_color=black&right_color=brightgreen&left_text=Downloads
+ :target: https://pepy.tech/project/pycryptobox
 pyCryptobox
 ===========
 

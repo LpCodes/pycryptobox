@@ -8,3 +8,4 @@
 .idea/workspace.xml
 *.pyc
 /pyAesCryptUtil/__pycache__
+.vscode/settings.json
