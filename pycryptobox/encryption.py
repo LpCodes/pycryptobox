@@ -12,7 +12,7 @@ bufferSize = 64 * 1024
 # Load environment variables from .env file
 load_dotenv()
 # Access the MY_PASSWORD environment variable
-password = os.getenv('MY_PASSWORD')
+password = os.getenv("MY_PASSWORD")
 
 
 # # Read the password from a configuration file
@@ -31,19 +31,30 @@ def encrypt_dir(dir_path):
     Returns:
         None
     """
+    if not os.path.isdir(dir_path):
+        print(f"Error: {dir_path} is not a directory.")
+        return
+    if not os.access(dir_path, os.R_OK):
+        print(f"Error: {dir_path} is not readable.")
+        return
     print("running encryption...")
     file_count = 0
     for dirpath, dirnames, filenames in os.walk(dir_path):
         for file in filenames:
             filename, ext = os.path.splitext(file)
-            if ext == '.locked':
+            if ext == ".locked":
                 continue
             file_count += 1
             file_path = os.path.join(dirpath, file)
             enctyped_output_path = file_path + ".locked"
             try:
+                # Check that the file exists
+                if not os.path.exists(file_path):
+                    raise Exception(f"File not found: {file_path}")
                 # Encrypt the file
-                pyAesCrypt.encryptFile(file_path, enctyped_output_path, password, bufferSize)
+                pyAesCrypt.encryptFile(
+                    file_path, enctyped_output_path, password, bufferSize
+                )
             except Exception as e:
                 print(f"Error encrypting file {file_path}: {e}")
                 continue
@@ -57,7 +68,7 @@ def encrypt_dir(dir_path):
 
 
 def encrpt_file(file):
-    """    Encrypts a single file.
+    """Encrypts a single file.
 
     Args:
         file (str): The path to the file to encrypt.
@@ -74,13 +85,12 @@ def encrpt_file(file):
         encrypted_output_path = file_path + ".locked"
         try:
             # Encrypt the file
-            pyAesCrypt.encryptFile(file_path, encrypted_output_path, password, bufferSize)
+            pyAesCrypt.encryptFile(
+                file_path, encrypted_output_path, password, bufferSize
+            )
             print(f"{file} successfully encrypted.")
         except Exception as e:
             print(f"Error: Failed to encrypt {file}: {e}")
         os.remove(file_path)
     else:
         print(f"Error: {file} is not a valid file path.")
-
-
-
