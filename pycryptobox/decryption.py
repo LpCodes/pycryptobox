@@ -54,7 +54,7 @@ def decrypt_dir(dir_path):
 
                 # Remove the encrypted file
                 try:
-                    os.remove(filename)
+                    os.remove(input_path)
                 except FileNotFoundError:
                     pass
     print(f"Decryption completed. Total number of files decrypted: {file_count}")
