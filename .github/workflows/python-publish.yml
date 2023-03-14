@@ -23,8 +23,8 @@ jobs:
 
       - name: Build and Publish Package
         env:
-          user: __token__
-          password: ${{ secrets.LP_API_TOKEN }}
+          user: ${{ secrets.PYPI_USERS }}
+          password: ${{ secrets.PYPI_PASSWORD }}
         run: |
           python setup.py sdist bdist_wheel
           twine upload --username $user --password $password dist/*
