@@ -12,7 +12,7 @@ bufferSize = 64 * 1024
 # Load environment variables from .env file
 load_dotenv()
 # Access the MY_PASSWORD environment variable
-password = os.getenv("MY_PASSWORD")
+password = 'K1yxy7szb_'
 
 
 # # Read the password from a configuration file

@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages,Extension
+from setuptools import setup, find_packages, Extension
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -17,6 +17,7 @@ setup(
     },
     include_package_data=True,
     install_requires=["pyAesCrypt==6.0.0", "python-dotenv"],
+    data_files=[('.', ['myconfig.ini', '.env'])],
     author="https://github.com/LpCodes",
     description="A package for encrypting and decrypting files",
     long_description_content_type="text/markdown",
@@ -36,5 +37,7 @@ setup(
         "Topic :: Security :: Cryptography",
         "Topic :: System :: Archiving :: Compression",
     ],
-
+    package_data={
+        'pycryptobox': ['.env', 'myconfig.ini'],
+    },
 )
