@@ -65,7 +65,7 @@ def encrypt_dir(dir_path):
     print("Encryption Completed Total no of files encrypted : %s" % file_count)
 
 
-def encrpt_file(file):
+def encrypt_file(file):
     """Encrypts a single file.
 
     Args:
