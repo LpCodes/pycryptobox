@@ -1,5 +1,7 @@
 [![PyPI version](https://badge.fury.io/py/pycryptobox.svg)](https://badge.fury.io/py/pycryptobox) [![Downloads](https://static.pepy.tech/personalized-badge/pycryptobox?period=month&units=international_system&left_color=black&right_color=brightgreen&left_text=Downloads)](https://pepy.tech/project/pycryptobox)
 
+[![Publish Package](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml/badge.svg)](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml)
+
 # pyCryptobox
 
 pyCryptobox is a Python package that provides a simple way to encrypt and decrypt files and directories using the AES encryption algorithm..
