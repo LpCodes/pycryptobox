@@ -16,7 +16,7 @@ setup(
         ]
     },
     install_requires=["pyAesCrypt==6.0.0", "python-dotenv"],
-    author="Lpcodes",
+    author="https://github.com/LpCodes",
     description="A package for encrypting and decrypting files",
     long_description_content_type="text/markdown",
     long_description=long_description,
