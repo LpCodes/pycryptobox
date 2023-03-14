@@ -59,7 +59,7 @@ def encrypt_dir(dir_path):
                 print(f"Error encrypting file {file_path}: {e}")
                 continue
             try:
-                os.remove(filename)
+                os.remove(file_path)
             except FileNotFoundError:
                 pass
     print("Encryption Completed Total no of files encrypted : %s" % file_count)
