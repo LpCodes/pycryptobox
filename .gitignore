@@ -11,3 +11,4 @@
 .vscode/settings.json
 /build/
 build/lib
+/pycryptobox
