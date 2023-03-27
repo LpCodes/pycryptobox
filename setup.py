@@ -37,6 +37,6 @@ setup(
         "Topic :: System :: Archiving :: Compression",
     ],
     package_data={
-        'pycryptobox': ['.env', 'myconfig.ini'],
+        'pycryptobox': ['config.ini'],
     },
 )

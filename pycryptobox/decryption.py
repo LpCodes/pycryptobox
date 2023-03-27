@@ -1,102 +1,93 @@
-#!/usr/bin/env python3
-
-
 import os
+import keyring
+import configparser
+from cryptography.fernet import Fernet
 
-import pyAesCrypt
-from dotenv import load_dotenv
+# Load the configuration file
+config = configparser.ConfigParser()
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
 
-# Encryption parameters
-bufferSize = 64 * 1024
-
-# Load environment variables from .env file
-load_dotenv()
-# Access the MY_PASSWORD environment variable
-password = 'K1yxy7szb_'
-
-
-def decrypt_dir(dir_path):
-    """
-    Decrypt all files in a directory that have been encrypted using AES.
-
-    Args:
-        dir_path (str): The path to the directory to decrypt.
-
-    Returns:
-        None
-    """
-    if not os.path.isdir(dir_path):
-        print(f"Error: {dir_path} is not a directory.")
-        return
-    if not os.access(dir_path, os.R_OK):
-        print(f"Error: {dir_path} is not readable.")
-        return
-    print("running decryption...")
-    file_count = 0
-    for root, dirs, files in os.walk(dir_path):
-        for file in files:
-            # Check if the file is encrypted
-            filename, ext = os.path.splitext(file)
-            # print(filename, ext)
-            if ext == ".locked":
-                file_count += 1
-                # Construct the file paths
-                input_path = os.path.join(root, file)
-                output_path = input_path[:-7]
-                try:
-                    # Decrypt the file
-                    pyAesCrypt.decryptFile(
-                        input_path, output_path, password, bufferSize
-                    )
-                except Exception as e:
-                    print(f"Error decrypting file {input_path}: {e}")
-                    continue
-
-                # Remove the encrypted file
-                try:
-                    os.remove(input_path)
-                except FileNotFoundError:
-                    pass
-    print(f"Decryption completed. Total number of files decrypted: {file_count}")
+# Get the keyring service name and username from the configuration file
+service_name = config.get('KEYRING', 'service_name')
+username = config.get('KEYRING', 'username')
 
 
-def decrypt_file(file):
-    """
-    Decrypts a single file that has been encrypted using AES.
+def decrypt_files_in_directory(dir_path):
+    # Get the encryption key from keyring
+    key = keyring.get_password(service_name, username)
 
-    Args:
-        file (str): The path to the file to decrypt.
+    # If the key doesn't exist, raise an error
+    if not key:
+        raise ValueError('Encryption key not found in keyring')
 
-    Returns:
-        None
-    """
-    if os.path.isfile(file):
-        file_path = os.path.abspath(file)
-        filename, ext = os.path.splitext(file)
-        if ext != ".locked":
-            print(f"{file} was not encrypted using this library")
-            return
-        # print(filename, ext)
-        if ext == ".locked":
-            output_path = file_path[:-7]
-            try:
-                # Check that the file exists
-                if not os.path.exists(file_path):
-                    raise Exception(f"File not found: {file_path}")
-                # Decrypt the file
-                pyAesCrypt.decryptFile(file_path, output_path, password, bufferSize)
-            except Exception as e:
-                print(f"Error decrypting file {file_path}: {e}")
-                return
+    # Create a Fernet object with the encryption key
+    fernet = Fernet(key)
 
-            # Remove the encrypted file
-            try:
-                os.remove(file_path)
-            except Exception as e:
-                print(f"Error removing file {file_path}: {e}")
-                return
+    # Initialize a counter for the number of files decrypted
+    num_decrypted_files = 0
 
-            print(f"{file} successfully decrypted.")
+    # Loop through all files in the directory
+    for filename in os.listdir(dir_path):
+        # Skip subdirectories
+        if os.path.isdir(os.path.join(dir_path, filename)):
+            continue
 
-    else:
-        print(f"Error: {file} is not a valid file path.")
+        # Check if the file is already decrypted
+        if not filename.endswith('.enc'):
+            print(f'{filename} is not encrypted and will not be decrypted')
+            continue
+
+        # Open the file and read its contents
+        with open(os.path.join(dir_path, filename), 'rb') as f:
+            contents = f.read()
+
+        # Decrypt the contents using Fernet
+        decrypted_contents = fernet.decrypt(contents)
+
+        # Write the decrypted contents to a new file without the .enc extension
+        with open(os.path.join(dir_path, filename[:-4]), 'wb') as f:
+            f.write(decrypted_contents)
+
+        # Remove the original encrypted file
+        os.remove(os.path.join(dir_path, filename))
+
+        num_decrypted_files += 1
+
+    print(f'{num_decrypted_files} files decrypted')
+
+
+def decrypt_file(file_path):
+    if not os.path.isfile(file_path):
+        raise FileNotFoundError(f"{file_path} not found")
+    if not file_path.endswith('.enc'):
+        print(f'{file_path} is not encrypted and will not be decrypted')
+        return f'{file_path} is not encrypted and will not be decrypted'
+    # Get the encryption key from keyring
+    key = keyring.get_password(service_name, username)
+
+    # If the key doesn't exist, raise an error
+    if not key:
+        raise ValueError('Encryption key not found in keyring')
+
+    # Create a Fernet object with the encryption key
+    fernet = Fernet(key)
+
+    # Check if the file is already decrypted
+    if not file_path.endswith('.enc'):
+        raise ValueError('File is not encrypted')
+
+    # Open the file and read its contents
+    with open(file_path, 'rb') as f:
+        contents = f.read()
+
+    # Decrypt the contents using Fernet
+    decrypted_contents = fernet.decrypt(contents)
+
+    # Overwrite the file with the decrypted contents
+    with open(file_path[:-4], 'wb') as f:
+        f.write(decrypted_contents)
+
+    # Remove the encrypted file
+    os.remove(file_path)
+
+    print(f"{file_path} ssuccessfully decrypted")
