@@ -7,3 +7,5 @@
 !/pycryptobox/decryption.py
 /pycryptobox/encryption.py
 /pycryptobox/decryption.py
+encryption.py
+decryption.py
