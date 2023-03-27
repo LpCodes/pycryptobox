@@ -92,10 +92,3 @@ def encrypt_file(file_path):
 
     print(f"{file_path} ssuccessfully encrypted")
 
-
-
-
-# encrypt_files_in_directory(r"C:\Users\lovel\Downloads\New folder")
-# decrypt_files_in_directory(r"C:\Users\lovel\Downloads\New folder")
-
-# decrypt_file(r"C:\Users\lovel\Downloads\New folder\90-907986_hd-nature-images-wallpaper-of-natures-organic-plants. - Copy.jpg.enc")

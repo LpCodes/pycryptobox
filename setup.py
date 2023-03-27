@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="pycryptobox",
-    version="1.0.5",
+    version="1.0.6",
     packages=find_packages(),
     entry_points={
         "console_scripts": [
@@ -16,7 +16,7 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=["pyAesCrypt==6.0.0", "python-dotenv"],
+    install_requires=["setuptools==67.6.0", "keyring==23.13.1", "cryptography==39.0.1"],
     author="https://github.com/LpCodes",
     description="A package for encrypting and decrypting files",
     long_description_content_type="text/markdown",
