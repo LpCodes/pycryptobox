@@ -4,3 +4,5 @@
 /build
 !/build/lib/
 /build/lib/!/pycryptobox.egg-info/
+!/pycryptobox/decryption.py
+!/pycryptobox/encryption.py
