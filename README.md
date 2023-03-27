@@ -2,7 +2,7 @@
 
 # pyCryptobox
 
-pyCryptobox is a package in Python that offers a straightforward approach to safeguard your confidential data by encrypting and decrypting files and directories using the AES encryption algorithm.
+pyCryptoBox is a Python package that allows you to encrypt and decrypt files and folders using the Fernet symmetric encryption algorithm.
 
 ## Installation
 
@@ -21,18 +21,18 @@ To encrypt a single file, use the `encrypt_file()` function:
 ```python
 from pycryptobox import encrypt_file
 
-file_path = r"/path/to/file.txt"
-encrypt_file(file_path)
+encrypt_file('/path/to/file')
+
 
 ```
 
 To encrypt all files in a directory, use the `encrypt_dir()` function
 
 ```python
-from pycryptobox import encrypt_dir
+from pycryptobox import encrypt_files_in_directory
 
-dir_path = "/path/to/directory"
-encrypt_dir(dir_path)
+encrypt_files_in_directory('/path/to/directory')
+
 
 
 ```
@@ -51,10 +51,10 @@ decrypt_file(file_path)
 To decrypt all files in a directory, use the decrypt_dir() function:
 
 ```
-from pycryptobox import decrypt_dir
+from pycryptobox import decrypt_files_in_directory
 
 dir_path = "/path/to/directory"
-decrypt_dir(dir_path)
+decrypt_files_in_directory(dir_path)
 ```
 
 ## Contributing
