@@ -1,14 +1,3 @@
-/.idea/.gitignore
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/pyAesCryptUtil.iml
-/.idea/vcs.xml
-.idea/workspace.xml
-*.pyc
-/pyAesCryptUtil/__pycache__
-.vscode/settings.json
-/build/
-build/lib
-/pycryptobox
+!/pycryptobox/config.ini
+/pycryptobox/config.ini!/build/
+/pycryptobox/config.ini!/pycryptobox.egg-info/
