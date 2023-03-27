@@ -3,4 +3,4 @@
 /pycryptobox/config.ini!/pycryptobox.egg-info/
 /build
 !/build/lib/
-/build/lib/
+/build/lib/!/pycryptobox.egg-info/
