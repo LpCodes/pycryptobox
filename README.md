@@ -1,4 +1,4 @@
-[![PyPI version](https://badge.fury.io/py/pycryptobox.svg)](https://badge.fury.io/py/pycryptobox) [![Downloads](https://static.pepy.tech/personalized-badge/pycryptobox?period=month&units=none&left_color=black&right_color=orange&left_text=Downloads)](https://pepy.tech/project/pycryptobox)[![Publish Package](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml/badge.svg)](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml)
+[![PyPI version](https://badge.fury.io/py/pycryptobox.svg)](https://badge.fury.io/py/pycryptobox) [![Downloads](https://static.pepy.tech/personalized-badge/pycryptobox?period=total&units=none&left_color=black&right_color=orange&left_text=Downloads)](https://pepy.tech/project/pycryptobox)[![Publish Package](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml/badge.svg)](https://github.com/LpCodes/pycryptobox/actions/workflows/python-publish.yml)
 
 # pyCryptobox
 
